@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binance Pro Terminal</title>
+    <!-- Google Fonts: Inter for UI, Roboto Mono for tabular digits -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- TradingView Script -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+</head>
+
+<body>
+    <div class="pro-grid">
+        <!-- 1. Header -->
+        <header class="panel">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <h1>Binance <span>Pro</span></h1>
+                <div class="divider"></div>
+                <div class="testnet-badge">TESTNET</div>
+            </div>
+            <div class="ticker-info" id="top-ticker">
+                <strong id="header-symbol">BTCUSDT</strong>
+                <span class="live-pulse"></span>
+            </div>
+        </header>
+
+        <!-- 2. Chart Area (Left) -->
+        <main class="panel chart-panel">
+            <div id="tradingview-widget-container"></div>
+        </main>
+
+        <!-- 3. Sidebar (Right) -->
+        <aside class="sidebar">
+            <div class="panel balance-panel">
+                <div class="panel-header">Available Margin</div>
+                <div class="balance-display">
+                    <span id="usdt-balance" class="num">0.00</span>
+                    <span class="currency">USDT</span>
+                </div>
+            </div>
+
+            <div class="panel trade-panel">
+                <div class="tabs">
+                    <button class="tab active" data-tab="market">Market</button>
+                    <button class="tab" data-tab="limit">Limit</button>
+                </div>
+
+                <form id="trade-form">
+                    <input type="hidden" id="order-type" value="MARKET">
+
+                    <div class="form-group row">
+                        <label>Symbol</label>
+                        <input type="text" id="symbol" value="BTCUSDT" placeholder="BTCUSDT" required
+                            autocomplete="off">
+                    </div>
+
+                    <div class="form-group bg-dark toggle-group">
+                        <input type="radio" id="side-buy" name="side" value="BUY" checked>
+                        <label for="side-buy" class="buy-label">Buy</label>
+
+                        <input type="radio" id="side-sell" name="side" value="SELL">
+                        <label for="side-sell" class="sell-label">Sell</label>
+                    </div>
+
+                    <!-- Only shows for Limit -->
+                    <div class="form-group row" id="price-group" style="display: none;">
+                        <label>Price</label>
+                        <input type="number" id="price" class="num" step="0.1" min="0.1" placeholder="USDT">
+                    </div>
+
+                    <div class="form-group row">
+                        <label>Amount</label>
+                        <input type="number" id="quantity" class="num" step="0.001" min="0.001" value="0.01" required>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="btn buy-btn">Buy BTCUSDT</button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- 4. Open Orders (Bottom) -->
+        <footer class="panel orders-panel">
+            <div class="panel-header with-action">
+                <span>Open Orders</span>
+                <button id="refresh-orders" class="text-btn">Refresh</button>
+            </div>
+            <div class="table-scroll">
+                <table id="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Symbol</th>
+                            <th>Type</th>
+                            <th>Side</th>
+                            <th class="right">Price</th>
+                            <th class="right">Amount</th>
+                            <th class="right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-body">
+                        <tr>
+                            <td colspan="7" class="empty-state">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
