@@ -146,26 +146,6 @@ in your browser.
 
 ---
 
-## 📸 Screenshots
-
-### CLI Output
-
-Below is an example of placing MARKET orders using the CLI:
-
-![CLI Output](assets/cli_output.png)
-
----
-
-### Dashboard Interface
-
-A lightweight dashboard for interacting with the bot:
-
-![Dashboard](assets/dashboard.png)
-
-*Note: The dashboard is a simple custom-built interface using HTML, CSS, and JavaScript, connected to a Python backend for executing trades.*
-
----
-
 ## 🧾 Logging
 
 Logs are stored in:
